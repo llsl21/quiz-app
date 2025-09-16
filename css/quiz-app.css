@@ -1,0 +1,31 @@
+.quiz-app {
+  padding: var(--spacing-400) var(--spacing-300) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-500);
+}
+
+@media (width >= calc(768 / 16 * 1rem)) {
+  .quiz-app {
+    padding: 0 var(--spacing-800);
+    gap: var(--spacing-800);
+  }
+}
+
+@media (width >= calc(1440 / 16 * 1rem)) {
+  .quiz-app {
+    flex-direction: row;
+    gap: var(--spacing-1600);
+    max-width: calc(1157 / 16 * 1rem);
+    margin-inline: auto;
+    padding-inline: revert;
+  }
+
+  .quiz-app > *:nth-child(1) {
+    flex: 0 0 calc(465 / 16 * 1rem);
+  }
+
+  .quiz-app > *:nth-child(2) {
+    flex: 0 0 calc(564 / 16 * 1rem);
+  }
+}

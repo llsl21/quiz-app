@@ -1,0 +1,86 @@
+:root {
+  /* basic color */
+  --white: hsl(0deg 100% 100%);
+  --black: hsl(0deg 0% 0%);
+
+  --grey-50: hsl(220deg 38% 97%);
+  --grey-500: hsl(219deg 13% 44%);
+
+  --blue-50: hsl(225deg 100% 96%);
+  --blue-100: hsl(220deg 50% 95%);
+  --blue-300: hsl(216deg 47% 78%);
+  --blue-500: hsl(223deg 100% 59%);
+  --blue-850: hsl(215deg 27% 32%);
+  --blue-900: hsl(216deg 25% 25%);
+  --blue-950: hsl(214deg 24% 23%);
+
+  --green-100: hsl(151deg 88% 94%);
+  --green-500: hsl(151deg 68% 52%);
+
+  --purple-100: hsl(278deg 100% 95%);
+  --purple-600: hsl(277deg 91% 56%);
+
+  --orange-50: hsl(27deg 100% 96%);
+  --orange-400: hsl(22deg 100% 60%);
+
+  --red-500: hsl(0deg 82% 63%);
+
+  /* actual color */
+  --primary-bg: var(--grey-50);
+  --secondary-bg: var(--white);
+  --primary-text: var(--blue-900);
+  --circle-fill: var(--blue-100);
+  --accent-text: var(--grey-500);
+
+  /* spacing */
+  --spacing-base: 8;
+  --spacing-100: calc(var(--spacing-base) / 16 * 1rem);
+  --spacing-200: calc(var(--spacing-100) * 2);
+  --spacing-300: calc(var(--spacing-100) * 3);
+  --spacing-400: calc(var(--spacing-100) * 4);
+  --spacing-500: calc(var(--spacing-100) * 5);
+  --spacing-600: calc(var(--spacing-100) * 6);
+  --spacing-700: calc(var(--spacing-100) * 7);
+  --spacing-800: calc(var(--spacing-100) * 8);
+  --spacing-900: calc(var(--spacing-100) * 9);
+  --spacing-1600: calc(var(--spacing-100) * 16);
+  --spacing-1800: calc(var(--spacing-100) * 18);
+  --spacing-2300: calc(var(--spacing-100) * 23);
+
+  /* text setting */
+  --text-preset-1: normal 500 calc(144 / 16 * 1rem) / 1 "Rubik", sans-serif;
+  --text-preset-2-medium: normal 500 calc(40 / 16 * 1rem) / 1 "Rubik",
+    sans-serif;
+  --text-preset-2-light: normal 300 calc(40 / 16 * 1rem) / 1 "Rubik", sans-serif;
+  --text-preset-3: normal 500 calc(20 / 16 * 1rem) / 1.2 "Rubik", sans-serif;
+  --text-preset-4: normal 500 calc(18 / 16 * 1rem) / 1 "Rubik", sans-serif;
+  --text-preset-5: italic 500 calc(14 / 16 * 1rem) / 1.5 "Rubik", sans-serif;
+
+  /* shadow */
+  --shadow: 0 var(--spacing-200) var(--spacing-500) 0 hsl(220deg 29% 66% / 14%);
+
+  &[data-theme="dark"] {
+    --primary-bg: var(--blue-900);
+    --secondary-bg: var(--blue-850);
+    --circle-fill: var(--blue-950);
+    --primary-text: var(--white);
+    --accent-text: var(--blue-300);
+  }
+}
+
+@media (width >= calc(768 / 16 * 1rem)) {
+  :root {
+    --text-preset-2-medium: normal 500 calc(64 / 16 * 1rem) / 1 "Rubik",
+      sans-serif;
+    --text-preset-2-light: normal 300 calc(64 / 16 * 1rem) / 1 "Rubik",
+      sans-serif;
+    --text-preset-3: normal 500 calc(36 / 16 * 1rem) / 1 "Rubik", sans-serif;
+    --text-preset-4: normal 500 calc(28 / 16 * 1rem) / 1 "Rubik", sans-serif;
+    --text-preset-5-medium: normal 500 calc(24 / 16 * 1rem) / 1.5 "Rubik",
+      sans-serif;
+    --text-preset-5-regular: normal 400 calc(24 / 16 * 1rem) / 1.5 "Rubik",
+      sans-serif;
+    --text-preset-6-italic: italic 400 calc(20 / 16 * 1rem) / 1.5 "Rubik",
+      sans-serif;
+  }
+}
