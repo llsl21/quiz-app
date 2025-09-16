@@ -31,6 +31,7 @@
   --primary-bg: var(--grey-50);
   --secondary-bg: var(--white);
   --primary-text: var(--blue-900);
+  --circle-fill: var(--blue-100);
   --accent-text: var(--grey-500);
 
   /* spacing */
@@ -59,6 +60,7 @@
   &[data-theme="dark"] {
     --primary-bg: var(--blue-900);
     --secondary-bg: var(--blue-850);
+    --circle-fill: var(--blue-950);
     --primary-text: var(--white);
     --accent-text: var(--blue-300);
   }
@@ -91,6 +93,16 @@
 
 body {
   background-color: var(--primary-bg);
+  padding-block-end: calc(207 / 16 * 1rem);
+  background-image: radial-gradient(
+    circle calc(977 / 2 / 16 * 1rem) at center,
+    transparent calc(100% - calc(144 / 16 * 1rem)),
+    var(--circle-fill) 0 100%,
+    transparent 0
+  );
+  background-repeat: no-repeat;
+  background-size: calc(977 / 16 * 1rem) calc(977 / 16 * 1rem);
+  background-position: right bottom;
 }
 
 img {
