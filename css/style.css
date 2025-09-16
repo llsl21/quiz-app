@@ -1,0 +1,245 @@
+@import url(font.css);
+
+:root {
+  /* basic color */
+  --white: hsl(0deg 100% 100%);
+  --black: hsl(0deg 0% 0%);
+
+  --grey-50: hsl(220deg 38% 97%);
+  --grey-500: hsl(219deg 13% 44%);
+
+  --blue-50: hsl(225deg 100% 96%);
+  --blue-100: hsl(220deg 50% 95%);
+  --blue-300: hsl(216deg 47% 78%);
+  --blue-500: hsl(223deg 100% 59%);
+  --blue-850: hsl(215deg 27% 32%);
+  --blue-900: hsl(216deg 25% 25%);
+  --blue-950: hsl(214deg 24% 23%);
+
+  --green-100: hsl(151deg 88% 94%);
+  --green-500: hsl(151deg 68% 52%);
+
+  --purple-100: hsl(278deg 100% 95%);
+  --purple-600: hsl(277deg 91% 56%);
+
+  --orange-50: hsl(27deg 100% 96%);
+  --orange-400: hsl(22deg 100% 60%);
+
+  --red-500: hsl(0deg 82% 63%);
+
+  /* actual color */
+  --primary-bg: var(--grey-50);
+  --secondary-bg: var(--white);
+  --primary-text: var(--blue-900);
+  --accent-text: var(--grey-500);
+
+  /* spacing */
+  --spacing-base: 8;
+  --spacing-100: calc(var(--spacing-base) / 16 * 1rem);
+  --spacing-200: calc(var(--spacing-100) * 2);
+  --spacing-300: calc(var(--spacing-100) * 3);
+  --spacing-400: calc(var(--spacing-100) * 4);
+  --spacing-500: calc(var(--spacing-100) * 5);
+  --spacing-600: calc(var(--spacing-100) * 6);
+  --spacing-800: calc(var(--spacing-100) * 8);
+  --spacing-900: calc(var(--spacing-100) * 9);
+  --spacing-1600: calc(var(--spacing-100) * 16);
+  --spacing-1800: calc(var(--spacing-100) * 18);
+  --spacing-2300: calc(var(--spacing-100) * 23);
+
+  /* text setting */
+  --text-preset-1: normal 500 calc(144 / 16 * 1rem) / 1 "Rubik", sans-serif;
+  --text-preset-2-medium: normal 500 calc(40 / 16 * 1rem) / 1 "Rubik",
+    sans-serif;
+  --text-preset-2-light: normal 300 calc(40 / 16 * 1rem) / 1 "Rubik", sans-serif;
+  --text-preset-3: normal 500 calc(20 / 16 * 1rem) / 1.2 "Rubik", sans-serif;
+  --text-preset-4: normal 500 calc(18 / 16 * 1rem) / 1 "Rubik", sans-serif;
+  --text-preset-5: italic 500 calc(14 / 16 * 1rem) / 1.5 "Rubik", sans-serif;
+
+  &[data-theme="dark"] {
+    --primary-bg: var(--blue-900);
+    --secondary-bg: var(--blue-850);
+    --primary-text: var(--white);
+    --accent-text: var(--blue-300);
+  }
+
+  @media (width >= calc(768 / 16 * 1rem)) {
+    :root {
+      --text-preset-2-medium: normal 500 calc(64 / 16 * 1rem) / 1 "Rubik",
+        sans-serif;
+      --text-preset-2-light: normal 300 calc(64 / 16 * 1rem) / 1 "Rubik",
+        sans-serif;
+      --text-preset-3: normal 500 calc(36 / 16 * 1rem) / 1 "Rubik", sans-serif;
+      --text-preset-4: normal 500 calc(28 / 16 * 1rem) / 1 "Rubik", sans-serif;
+      --text-preset-5-medium: normal 500 calc(24 / 16 * 1rem) / 1.5 "Rubik",
+        sans-serif;
+      --text-preset-5-regular: normal 400 calc(24 / 16 * 1rem) / 1.5 "Rubik",
+        sans-serif;
+      --text-preset-6-italic: italic 400 calc(20 / 16 * 1rem) / 1.5 "Rubik",
+        sans-serif;
+    }
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--primary-bg);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+button {
+  appearance: none;
+  border: none;
+}
+
+.quiz-app__header {
+  height: var(--spacing-900);
+  padding: var(--spacing-200) var(--spacing-300);
+}
+
+.quiz-app__header-row {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: end;
+  gap: var(--spacing-100);
+}
+
+.quiz-app__header-img-wrapper {
+  width: var(--spacing-200);
+  aspect-ratio: 1 / 1;
+}
+
+.quiz-app__header-switch {
+  label {
+    display: block;
+    width: var(--spacing-400);
+    aspect-ratio: 1.6 / 1;
+    background-color: var(--purple-600);
+    position: relative;
+    border-radius: 9999px;
+
+    &::before {
+      content: "";
+      width: calc(var(--spacing-100) * 1.5);
+      aspect-ratio: 1 / 1;
+      background-color: var(--white);
+      position: absolute;
+      border-radius: 50%;
+      top: calc(var(--spacing-100) / 2);
+      left: calc(var(--spacing-100) / 2);
+      transition: transform 0.5s;
+    }
+
+    &:has(input:checked) {
+      &::before {
+        transform: translateX(100%);
+      }
+    }
+  }
+
+  input[type="checkbox"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+}
+
+.quiz-app {
+  padding: var(--spacing-400) var(--spacing-300) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-500);
+}
+
+.quiz-app__heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-200);
+}
+
+.quiz-app__heading {
+  color: var(--primary-text);
+  font: var(--text-preset-2-light);
+
+  b {
+    display: inline-block;
+    font: var(--text-preset-2-medium);
+    margin-block-start: var(--spacing-100);
+  }
+}
+
+.quiz-app__heading-eyebrow {
+  color: var(--accent-text);
+  font: var(--text-preset-5);
+}
+
+.quiz-app__category-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-200);
+}
+
+.quiz-app__category-list-item {
+  padding: var(--spacing-200);
+  border-radius: calc(12 / 16 * 1rem);
+  background-color: var(--secondary-bg);
+}
+
+.quiz-app__category-list-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  background-color: transparent;
+  gap: var(--spacing-200);
+  font: var(--text-preset-4);
+  color: var(--primary-text);
+}
+
+.quiz-app__category-list-img-wrapper {
+  width: var(--spacing-500);
+  aspect-ratio: 1 / 1;
+  border-radius: calc(6 / 16 * 1rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.img-html {
+    background-color: var(--orange-50);
+  }
+  &.img-css {
+    background-color: var(--green-100);
+  }
+  &.img-js {
+    background-color: var(--blue-50);
+  }
+  &.img-accessibility {
+    background-color: var(--purple-100);
+  }
+
+  & > img {
+    width: 71.425%;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-bg: var(--blue-900);
+  }
+}

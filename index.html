@@ -1,48 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Frontend quiz app</title>
-</head>
-<body>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
 
-  <!-- Quiz menu start -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Frontend Mentor | Frontend quiz app</title>
+    <script src="/index.js" defer></script>
+  </head>
+  <body>
+    <header class="quiz-app__header">
+      <div class="quiz-app__header-row">
+        <picture class="quiz-app__header-img-wrapper">
+          <source
+            srcset="/assets/images/icon-sun-light.svg"
+            data-theme="dark"
+          />
+          <source
+            srcset="/assets/images/icon-sun-dark.svg"
+            data-theme="light"
+          />
+          <img
+            src="/assets/images/icon-sun-dark.svg"
+            alt=""
+            data-theme="light"
+          />
+        </picture>
+        <div class="quiz-app__header-switch">
+          <label for="header__switch">
+            <input type="checkbox" id="header__switch" />
+          </label>
+        </div>
+        <picture class="quiz-app__header-img-wrapper">
+          <source
+            srcset="/assets//images/icon-moon-light.svg"
+            data-theme="dark"
+          />
+          <source
+            srcset="/assets//images/icon-moon-dark.svg"
+            data-theme="light"
+          />
+          <img
+            src="/assets/images/icon-moon-dark.svg"
+            alt=""
+            data-theme="light"
+          />
+        </picture>
+      </div>
+    </header>
+    <main class="quiz-app">
+      <div class="quiz-app__heading-group">
+        <h1 class="quiz-app__heading">Welcome to the <b>Frontend Quiz!</b></h1>
+        <p class="quiz-app__heading-eyebrow">Pick a subject to get started</p>
+      </div>
+      <div class="quiz-app__category">
+        <ul class="quiz-app__category-list">
+          <li class="quiz-app__category-list-item">
+            <button class="quiz-app__category-list-button">
+              <div class="quiz-app__category-list-img-wrapper img-html">
+                <img src="assets/images/icon-html.svg" />
+              </div>
+              HTML
+            </button>
+          </li>
+          <li class="quiz-app__category-list-item">
+            <button class="quiz-app__category-list-button">
+              <div class="quiz-app__category-list-img-wrapper img-css">
+                <img src="assets/images/icon-css.svg" />
+              </div>
+              CSS
+            </button>
+          </li>
+          <li class="quiz-app__category-list-item">
+            <button class="quiz-app__category-list-button">
+              <div class="quiz-app__category-list-img-wrapper img-js">
+                <img src="assets/images/icon-js.svg" />
+              </div>
+              JAVASCRIPT
+            </button>
+          </li>
+          <li class="quiz-app__category-list-item">
+            <button class="quiz-app__category-list-button">
+              <div
+                class="quiz-app__category-list-img-wrapper img-accessibility"
+              >
+                <img src="assets/images/icon-accessibility.svg" />
+              </div>
+              ACCESSIBILITY
+            </button>
+          </li>
+        </ul>
+      </div>
+    </main>
 
-  Welcome to the Frontend Quiz!
-  Pick a subject to get started.
+    <!-- Quiz menu start -->
 
-  HTML
-  CSS
-  JavaScript
-  Accessibility
+    Welcome to the Frontend Quiz! Pick a subject to get started. HTML CSS
+    JavaScript Accessibility
 
-  <!-- Quiz menu end -->
+    <!-- Quiz menu end -->
 
-  <!-- Quiz question start -->
+    <!-- Quiz question start -->
 
-  Question <!-- number --> of 10
+    Question
+    <!-- number -->
+    of 10 A B C D Submit answer
 
-  A
-  B
-  C
-  D
+    <!-- Quiz question end -->
 
-  Submit answer
+    <!-- Quiz completed start -->
 
-  <!-- Quiz question end -->
+    Quiz completed You scored...
 
-  <!-- Quiz completed start -->
+    <!-- score -->
+    out of 10
 
-  Quiz completed
-  You scored...
-
-  <!-- score --> out of 10
-
-  <!-- Quiz completed end -->
-
-</body>
+    <!-- Quiz completed end -->
+  </body>
 </html>
