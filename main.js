@@ -28,139 +28,63 @@
 // }
 
 // initApp();
-let questionNum = 0;
-let quizObj;
+
 import { setupThemeSwitch } from "./js/theme-switch.js";
+import { QuizState } from "./js/state.js";
+import { fetchQuizzes, findQuizByTitle } from "./js/quiz.js";
+import { populateQuestion, populateAnswerList } from "./js/ui.js";
 
-// const main = document.querySelector("main");
-// const questionViewTemplate = document.getElementById("template__question-view");
-// const questionViewRoot = questionViewTemplate.content.cloneNode(true);
-// const answerListTemplate = questionViewRoot.getElementById(
-//   "template__answer-list-item"
-// );
+// クイズ状態管理インスタンス
+const quizState = new QuizState();
 
-// async function fetchAndShowQuiz(category) {
-//   const response = await fetch("/data.json");
-//   const { quizzes } = await response.json();
-//   console.log(quizzes);
-
-//   const [{ title, icon, questions }] = quizzes.filter(({ title }) => {
-//     return title === category;
-//   });
-
-//   questionViewRoot.querySelector(".quiz-app__question-heading").textContent =
-//     questions[0].question;
-
-//   document.querySelector("body").replaceChild(questionViewRoot, main);
-// }
-
-// fetchAndShowQuiz("HTML");
-
-// Theme setup
-
-const teardown = setupThemeSwitch({
+// テーマ切り替え
+setupThemeSwitch({
   switchSelector: "#header__switch",
   initial: document.documentElement.dataset.theme,
   persist: true,
 });
 
+// カテゴリ選択時の処理
 const onClickCategory = async (e) => {
-  const numAlphaMap = ["A", "B", "C", "D"];
-  const questionTemplate = document.getElementById("template__question-view");
-  const questionRoot = questionTemplate.content.cloneNode(true);
-  const answerListItemTemplate = questionRoot.getElementById(
-    "template__answer-list-item"
-  );
-  const answerList = questionRoot.querySelector(".quiz-app__answer-list");
-  const body = document.querySelector("body");
-  const main = document.querySelector("main");
+  e.preventDefault();
   const category = e.currentTarget.textContent.trim();
 
-  e.preventDefault();
+  const quizzes = await fetchQuizzes();
+  const quiz = findQuizByTitle(quizzes, category);
+  if (!quiz) {
+    console.error(`No quiz found about ${category}`);
+    return;
+  }
 
-  const res = await fetch("/data.json");
-  const { quizzes } = await res.json();
-  const [quiz] = quizzes.filter(({ title }) => {
-    return title.toUpperCase() === category.toUpperCase();
-  });
-  if (!quiz) console.error(`No quiz found about ${category}`);
-
-  quizObj = quiz;
-  // populate question
-  populateQuiz(quizObj);
+  quizState.setQuiz(quiz);
+  showCurrentQuestion();
 };
 
+// 問題表示
+function showCurrentQuestion() {
+  const { currentQuestion, quizObj, quizNum } = quizState;
+  if (!currentQuestion) return;
+
+  populateQuestion(
+    currentQuestion,
+    document,
+    quizNum + 1,
+    quizObj.questions.length,
+    onClickSubmit
+  );
+  populateAnswerList(currentQuestion.options, document);
+}
+
+// 回答送信時の処理
+const onClickSubmit = () => {
+  quizState.nextQuestion();
+  showCurrentQuestion();
+};
+
+// カテゴリボタンにイベント登録
 const categoryButtons = document.querySelectorAll(
   ".quiz-app__category-list-button"
 );
 categoryButtons.forEach((categoryButton) => {
   categoryButton.addEventListener("click", onClickCategory);
 });
-
-const onClickSubmit = async (e) => {
-  questionNum++;
-  populateQuiz(quizObj);
-};
-
-function calculateRatio(portion, unit) {
-  if (typeof unit !== "number") {
-    console.error("unit type should be number.");
-    return;
-  }
-  if (unit === 0) {
-    console.error("unit must not be zero.");
-    return;
-  }
-  return `${(portion / unit) * 100}%`;
-}
-
-function updateIndicator(indicator, allQuestionLength) {
-  indicator.style.setProperty(
-    "--before-width",
-    calculateRatio(questionNum + 1, allQuestionLength)
-  );
-}
-
-function populateQuestion(question, root = document, allQuestionLength) {
-  const main = document.querySelector("main");
-  const questionTemplate = root.getElementById("template__question-view");
-  const questionRoot = questionTemplate.content.cloneNode(true);
-  populateElement(questionRoot, ".quiz-app__question-heading", question);
-  populateElement(
-    questionRoot,
-    ".quiz-app__question-heading-ratio",
-    `Question ${questionNum + 1} of ${allQuestionLength}`
-  );
-  const indicator = questionRoot.querySelector(
-    ".quiz-app__question-indicator-ratio"
-  );
-  updateIndicator(indicator, allQuestionLength);
-  const submitButton = questionRoot.querySelector(".submit-button");
-  submitButton.addEventListener("click", onClickSubmit);
-  document.body.replaceChild(questionRoot, main);
-}
-
-function populateAnswerList(options, root = document) {
-  const answerListItemTemplate = root.getElementById(
-    "template__answer-list-item"
-  );
-  const answerList = document.querySelector(".quiz-app__answer-list");
-
-  options.forEach((option, index) => {
-    const answerListRoot = answerListItemTemplate.content.cloneNode(true);
-    populateElement(answerListRoot, ".list-item__img-wrapper", index + 1);
-    populateElement(answerListRoot, ".quiz-app__answer-list-content", option);
-    answerList.append(answerListRoot);
-  });
-}
-
-function populateElement(root, selector, value) {
-  const elem = root.querySelector(selector);
-  if (!elem) console.error(`no element found for the selector: ${selector}`);
-  elem.textContent = value;
-}
-
-function populateQuiz({ questions }) {
-  populateQuestion(questions[questionNum].question, document, questions.length);
-  populateAnswerList(questions[questionNum].options);
-}
