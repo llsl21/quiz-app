@@ -24,13 +24,15 @@
   background-color: var(--secondary-bg);
   height: var(--spacing-200);
   border-radius: 999px;
+  width: 100%;
   padding: calc(var(--spacing-100) / 2);
+  --before-width: 100%;
   &::before {
     content: "";
     display: block;
     height: var(--spacing-100);
     background-color: var(--purple-600);
-    width: 100%;
+    width: var(--before-width);
     border-radius: 999px;
   }
 }

@@ -28,8 +28,8 @@
 // }
 
 // initApp();
-const questionNum = 0;
-let questionObj;
+let questionNum = 0;
+let quizObj;
 import { setupThemeSwitch } from "./js/theme-switch.js";
 
 // const main = document.querySelector("main");
@@ -74,7 +74,7 @@ const onClickCategory = async (e) => {
   const answerList = questionRoot.querySelector(".quiz-app__answer-list");
   const body = document.querySelector("body");
   const main = document.querySelector("main");
-  const category = e.target.textContent.trim();
+  const category = e.currentTarget.textContent.trim();
 
   e.preventDefault();
 
@@ -85,20 +85,9 @@ const onClickCategory = async (e) => {
   });
   if (!quiz) console.error(`No quiz found about ${category}`);
 
-  questionObj = quiz;
-  questionRoot.querySelector(".quiz-app__question-heading").textContent =
-    questionObj.questions[questionNum].question;
-
-  quiz.questions[questionNum].options.forEach((option, index) => {
-    const answerListItemRoot = answerListItemTemplate.content.cloneNode(true);
-    const answerListNumLabel = answerListItemRoot.querySelector(
-      ".quiz-app__answer-list-img-wrapper"
-    );
-    answerListNumLabel.textContent = numAlphaMap[index];
-    answerListNumLabel.after(option);
-    answerList.append(answerListItemRoot);
-  });
-  body.replaceChild(questionRoot, main);
+  quizObj = quiz;
+  // populate question
+  populateQuiz(quizObj);
 };
 
 const categoryButtons = document.querySelectorAll(
@@ -109,25 +98,57 @@ categoryButtons.forEach((categoryButton) => {
 });
 
 const onClickSubmit = async (e) => {
-  questionNum += 1;
+  questionNum++;
+  populateQuiz(quizObj);
 };
 
-function populateQuestion(question, root = document) {
+function calculateRatio(portion, unit) {
+  if (typeof unit !== "number") {
+    console.error("unit type should be number.");
+    return;
+  }
+  if (unit === 0) {
+    console.error("unit must not be zero.");
+    return;
+  }
+  return `${(portion / unit) * 100}%`;
+}
+
+function updateIndicator(indicator, allQuestionLength) {
+  indicator.style.setProperty(
+    "--before-width",
+    calculateRatio(questionNum + 1, allQuestionLength)
+  );
+}
+
+function populateQuestion(question, root = document, allQuestionLength) {
   const main = document.querySelector("main");
   const questionTemplate = root.getElementById("template__question-view");
   const questionRoot = questionTemplate.content.cloneNode(true);
   populateElement(questionRoot, ".quiz-app__question-heading", question);
+  populateElement(
+    questionRoot,
+    ".quiz-app__question-heading-ratio",
+    `Question ${questionNum + 1} of ${allQuestionLength}`
+  );
+  const indicator = questionRoot.querySelector(
+    ".quiz-app__question-indicator-ratio"
+  );
+  updateIndicator(indicator, allQuestionLength);
+  const submitButton = questionRoot.querySelector(".submit-button");
+  submitButton.addEventListener("click", onClickSubmit);
   document.body.replaceChild(questionRoot, main);
 }
 
 function populateAnswerList(options, root = document) {
-  const answerListTemplate = root.getElementById("template__answer-list-item");
+  const answerListItemTemplate = root.getElementById(
+    "template__answer-list-item"
+  );
   const answerList = document.querySelector(".quiz-app__answer-list");
 
-  const fragment = new createDocumentFragment();
   options.forEach((option, index) => {
-    const answerListRoot = answerListTemplate.content.cloneNode(true);
-    populateElement(answerListItemRoot, ".list-item__img-wrapper", index + 1);
+    const answerListRoot = answerListItemTemplate.content.cloneNode(true);
+    populateElement(answerListRoot, ".list-item__img-wrapper", index + 1);
     populateElement(answerListRoot, ".quiz-app__answer-list-content", option);
     answerList.append(answerListRoot);
   });
@@ -139,7 +160,7 @@ function populateElement(root, selector, value) {
   elem.textContent = value;
 }
 
-function populateQuiz(quizObj) {
-  populateQuestion();
-  populateAnswerList();
+function populateQuiz({ questions }) {
+  populateQuestion(questions[questionNum].question, document, questions.length);
+  populateAnswerList(questions[questionNum].options);
 }
