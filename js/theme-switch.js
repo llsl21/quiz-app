@@ -56,6 +56,26 @@ function applyTheme(theme) {
   });
 }
 
+function detectTheme({ stored, initial, root }) {
+  const candidate = stored ?? initial ?? root.dataset.theme;
+
+  switch (candidate) {
+    case "light":
+    case "dark":
+      return candidate;
+
+    case "system":
+    case undefined:
+      return matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+
+    default:
+      console.warn(`Unknown theme: ${candidate}, fallback to 'light'`);
+      return "light";
+  }
+}
+
 export function setupThemeSwitch({
   switchSelector = "#header__switch",
   root = rootEl,
@@ -71,33 +91,9 @@ export function setupThemeSwitch({
 
   const stored = persist ? localStorage.getItem("theme") : null;
 
-  const theme =
-    stored ??
-    initial ??
-    root.dataset.theme ??
-    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-  // ここで
-  /* 
-    const theme =
-    stored ??
-    initial ??
-    root.dataset.theme ??
-    matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    というふうにmatchMediaを括弧で括らないと常にdarkになる。
-    これはoperator precedenceがについて??が?:より高いため。
-    storedでもinitialでも三項演算子の前に一つでもtruthyがあればdarkが返ってくる。
-    つまり
-    const theme =
-    （stored ??
-    initial ??
-    root.dataset.theme ??
-    matchMedia("(prefers-color-scheme: dark)").matches)
-　　　　　　　 ? "dark" : "light";
-    のようになっているということ。
-    ちなみに三項演算子と代入演算子は優先順位が同じだが、associativityがどちらもright-to-leftなので、右にある三項演算子から先に評価される。
-    */
-
+  const theme = detectTheme({ stored, initial, root });
   root.dataset.theme = theme;
+
   if ("checked" in el) el.checked = theme === "dark";
   applyTheme(theme);
 

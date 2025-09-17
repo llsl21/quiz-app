@@ -33,6 +33,6 @@ import { setupThemeSwitch } from "./js/theme-switch.js";
 
 const teardown = setupThemeSwitch({
   switchSelector: "#header__switch",
-  initial: document.documentElement.dataset.theme || "light",
+  initial: document.documentElement.dataset.theme,
   persist: true,
 });
