@@ -28,7 +28,8 @@
 // }
 
 // initApp();
-
+const questionNum = 0;
+let questionObj;
 import { setupThemeSwitch } from "./js/theme-switch.js";
 
 // const main = document.querySelector("main");
@@ -73,7 +74,6 @@ const onClickCategory = async (e) => {
   const answerList = questionRoot.querySelector(".quiz-app__answer-list");
   const body = document.querySelector("body");
   const main = document.querySelector("main");
-  const questionNum = 0;
   const category = e.target.textContent.trim();
 
   e.preventDefault();
@@ -85,8 +85,9 @@ const onClickCategory = async (e) => {
   });
   if (!quiz) console.error(`No quiz found about ${category}`);
 
+  questionObj = quiz;
   questionRoot.querySelector(".quiz-app__question-heading").textContent =
-    quiz.questions[questionNum].question;
+    questionObj.questions[questionNum].question;
 
   quiz.questions[questionNum].options.forEach((option, index) => {
     const answerListItemRoot = answerListItemTemplate.content.cloneNode(true);
@@ -106,3 +107,39 @@ const categoryButtons = document.querySelectorAll(
 categoryButtons.forEach((categoryButton) => {
   categoryButton.addEventListener("click", onClickCategory);
 });
+
+const onClickSubmit = async (e) => {
+  questionNum += 1;
+};
+
+function populateQuestion(question, root = document) {
+  const main = document.querySelector("main");
+  const questionTemplate = root.getElementById("template__question-view");
+  const questionRoot = questionTemplate.content.cloneNode(true);
+  populateElement(questionRoot, ".quiz-app__question-heading", question);
+  document.body.replaceChild(questionRoot, main);
+}
+
+function populateAnswerList(options, root = document) {
+  const answerListTemplate = root.getElementById("template__answer-list-item");
+  const answerList = document.querySelector(".quiz-app__answer-list");
+
+  const fragment = new createDocumentFragment();
+  options.forEach((option, index) => {
+    const answerListRoot = answerListTemplate.content.cloneNode(true);
+    populateElement(answerListItemRoot, ".list-item__img-wrapper", index + 1);
+    populateElement(answerListRoot, ".quiz-app__answer-list-content", option);
+    answerList.append(answerListRoot);
+  });
+}
+
+function populateElement(root, selector, value) {
+  const elem = root.querySelector(selector);
+  if (!elem) console.error(`no element found for the selector: ${selector}`);
+  elem.textContent = value;
+}
+
+function populateQuiz(quizObj) {
+  populateQuestion();
+  populateAnswerList();
+}
