@@ -51,11 +51,19 @@ button {
 @media (width >= calc(1440 / 16 * 1rem)) {
   body {
     padding-block-end: calc(272 / 16 * 1rem);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-bg: var(--blue-900);
+    background-image: radial-gradient(
+        circle calc(977 / 2 / 16 * 1rem) at center,
+        transparent calc(100% - calc(144 / 16 * 1rem)),
+        var(--circle-fill) 0 100%,
+        transparent 0
+      ),
+      radial-gradient(
+        circle calc(977 / 2 / 16 * 1rem) at center,
+        transparent calc(100% - calc(144 / 16 * 1rem)),
+        var(--circle-fill) 0 100%,
+        transparent 0
+      );
+    background-position: left calc(-540 / 16 * 1rem) top calc(-413 / 16 * 1rem),
+      right calc(-437 / 16 * 1rem) bottom calc(-369 / 16 * 1rem);
   }
 }
