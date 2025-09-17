@@ -4,6 +4,7 @@
 @import url(quiz-app-heading.css);
 @import url(quiz-app.css);
 @import url(list.css);
+@import url(question-view.css);
 
 *,
 *::before,
@@ -25,6 +26,10 @@ body {
   background-repeat: no-repeat;
   background-size: calc(977 / 16 * 1rem) calc(977 / 16 * 1rem);
   background-position: right bottom;
+}
+
+body:has(main.quiz-app__question-view) {
+  padding-block-end: calc(87 / 16 * 1rem);
 }
 
 img {

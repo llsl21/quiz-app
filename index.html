@@ -57,7 +57,7 @@
     </header>
     <main class="quiz-app">
       <div class="quiz-app__heading-group">
-        <h1 class="quiz-app__heading">Welcome to the <b>Frontend Quiz!</b></h1>
+        <h2 class="quiz-app__heading">Welcome to the <b>Frontend Quiz!</b></h2>
         <p class="quiz-app__heading-eyebrow">Pick a subject to get started</p>
       </div>
       <div class="quiz-app__category">
@@ -105,5 +105,43 @@
         </ul>
       </div>
     </main>
+
+    <template id="template__question-view">
+      <main class="quiz-app__question-view">
+        <div class="quiz-app__question-group">
+          <div class="quiz-app__question-heading-group">
+            <p class="quiz-app__question-heading-ratio">Question 6 of 10</p>
+            <h2 class="quiz-app__question-heading">
+              Which of these color contrast ratios defines the minimum WCAG 2.1
+              Level AA requirement for normal text?
+            </h2>
+          </div>
+          <div class="quiz-app__question-indicator-ratio"></div>
+        </div>
+
+        <div class="quiz-app__answer-group">
+          <ul class="quiz-app__answer-list list">
+            <template id="template__answer-list-item">
+              <li class="quiz-app__answer-list-item list-item">
+                <button
+                  class="quiz-app__answer-list-item__button list-item__button"
+                >
+                  <div
+                    class="quiz-app__answer-list-img-wrapper list-item__img-wrapper"
+                  ></div>
+                </button>
+              </li>
+            </template>
+          </ul>
+          <div class="quiz-app__answer-list-item list-item submit">
+            <button
+              class="quiz-app__answer-list-item__button list-item__button"
+            >
+              Submit Answer
+            </button>
+          </div>
+        </div>
+      </main>
+    </template>
   </body>
 </html>

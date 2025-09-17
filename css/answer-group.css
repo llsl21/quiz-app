@@ -1,0 +1,19 @@
+.quiz-app__answer-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-200);
+}
+
+.quiz-app__answer-list-img-wrapper {
+  background-color: var(--grey-50);
+}
+
+.submit {
+  background-color: var(--purple-600);
+  padding-block: calc(19 / 16 * 1rem);
+  & > button {
+    color: var(--white);
+    text-align: center;
+    justify-content: center;
+  }
+}

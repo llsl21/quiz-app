@@ -1,0 +1,9 @@
+@import url(question-group.css);
+@import url(answer-group.css);
+
+.quiz-app__question-view {
+  padding: var(--spacing-400) var(--spacing-300);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-500);
+}
