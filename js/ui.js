@@ -7,6 +7,10 @@ export const withCommon = (handler) => (e) => {
 
 export function setupInitialPage(template, onClickCategory) {
   const initialPageFragment = template.content.cloneNode(true);
+  const isHeaderTemplateAlreadyExist = document.querySelector(
+    ".header-row__logo-wrapper"
+  );
+  if (isHeaderTemplateAlreadyExist) isHeaderTemplateAlreadyExist.remove();
   const categoryButtons = initialPageFragment.querySelectorAll(
     ".quiz-app__category-list-button"
   );
