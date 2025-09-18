@@ -92,6 +92,8 @@ export function setupThemeSwitch({
   const stored = persist ? localStorage.getItem("theme") : null;
 
   const theme = detectTheme({ stored, initial, root });
+  console.log("detected theme ", theme);
+
   root.dataset.theme = theme;
 
   if ("checked" in el) el.checked = theme === "dark";

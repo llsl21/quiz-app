@@ -4,8 +4,78 @@
   gap: var(--spacing-200);
 }
 
+.quiz-app__answer-list:has(.correct) {
+  & .correct {
+    box-shadow: 0 0 0 calc(3 / 16 * 1rem) var(--green-500) inset;
+
+    & .quiz-app__answer-list-img-wrapper {
+      background-color: var(--green-500);
+      color: var(--white);
+    }
+
+    &::after {
+      content: "";
+      background-image: url("/assets/images/icon-correct.svg");
+      background-size: contain;
+      aspect-ratio: 1 / 1;
+      align-self: center;
+      flex: 0 0 calc(32 / 16 * 1rem);
+      margin-inline-start: auto;
+    }
+  }
+}
+
+.quiz-app__answer-list:has(.incorrect) {
+  & .incorrect {
+    box-shadow: 0 0 0 calc(3 / 16 * 1rem) var(--red-500) inset;
+
+    & .quiz-app__answer-list-img-wrapper {
+      background-color: var(--red-500);
+      color: var(--white);
+    }
+    &::after {
+      content: "";
+      background-image: url("/assets/images/icon-incorrect.svg");
+      background-size: contain;
+      aspect-ratio: 1 / 1;
+      align-self: center;
+      flex: 0 0 calc(32 / 16 * 1rem);
+      margin-inline-start: auto;
+    }
+  }
+}
+
+.quiz-app__answer-list:has(.incorrect):has(.correct) {
+  & .correct {
+    box-shadow: revert;
+
+    & .quiz-app__answer-list-img-wrapper {
+      background-color: var(--grey-50);
+      color: var(--grey-500);
+    }
+  }
+}
+
+.quiz-app__answer-list:has(.correct, .incorrect) {
+  & button:not(.correct, .incorrect) {
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      box-shadow: none;
+    }
+    & .list-item__img-wrapper {
+      background-color: var(--grey-50);
+      color: var(--grey-500);
+    }
+  }
+  & button {
+    cursor: initial;
+  }
+}
+
 .quiz-app__answer-list-img-wrapper {
   background-color: var(--grey-50);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .submit {
@@ -15,5 +85,27 @@
     color: var(--white);
     text-align: center;
     justify-content: center;
+    margin-block: calc(-19 / 16 * 1rem);
+    padding-block: calc(19 / 16 * 1rem);
+  }
+}
+
+@media (width >= calc(768 / 16 * 1rem)) {
+  .submit {
+    padding: var(--spacing-400);
+
+    & > button {
+      margin: calc(var(--spacing-400) * -1);
+      padding: var(--spacing-400);
+    }
+  }
+
+  .quiz-app__answer-list:has(.correct, .incorrect) {
+    & .correct,
+    & .incorrect {
+      &::after {
+        flex: 0 0 calc(40 / 16 * 1rem);
+      }
+    }
   }
 }

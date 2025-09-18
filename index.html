@@ -18,6 +18,14 @@
   <body>
     <header class="quiz-app__header">
       <div class="quiz-app__header-row">
+        <template id="template__header">
+          <div class="header-row__logo-wrapper">
+            <div class="header-row__logo-img-wrapper">
+              <img src="" alt="" class="header-row__logo-img" />
+            </div>
+            <p class="header-row__logo-heading"></p>
+          </div>
+        </template>
         <picture class="quiz-app__header-img-wrapper">
           <source
             srcset="/assets/images/icon-sun-light.svg"
@@ -136,6 +144,7 @@
           </ul>
           <div class="quiz-app__answer-list-item list-item submit">
             <button
+              type="submit"
               class="quiz-app__answer-list-item__button list-item__button submit-button"
             >
               Submit Answer

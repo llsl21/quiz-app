@@ -44,6 +44,7 @@ ul {
 button {
   appearance: none;
   border: none;
+  cursor: pointer;
 }
 
 @media (width >= calc(768 / 16 * 1rem)) {

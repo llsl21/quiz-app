@@ -32,7 +32,12 @@
 import { setupThemeSwitch } from "./js/theme-switch.js";
 import { QuizState } from "./js/state.js";
 import { fetchQuizzes, findQuizByTitle } from "./js/quiz.js";
-import { populateQuestion, populateAnswerList } from "./js/ui.js";
+import {
+  populateQuestion,
+  populateAnswerList,
+  findOptionDOM,
+  getHeaderTemplate,
+} from "./js/ui.js";
 
 // クイズ状態管理インスタンス
 const quizState = new QuizState();
@@ -62,23 +67,63 @@ const onClickCategory = async (e) => {
 
 // 問題表示
 function showCurrentQuestion() {
-  const { currentQuestion, quizObj, quizNum } = quizState;
-  if (!currentQuestion) return;
+  const { currentQuiz, totalQuestionLength, quizNum, quizCategory, quizIcon } =
+    quizState;
+  if (!currentQuiz) return;
+
+  populateHeader(quizCategory, quizIcon);
 
   populateQuestion(
-    currentQuestion,
+    currentQuiz,
     document,
     quizNum + 1,
-    quizObj.questions.length,
-    onClickSubmit
+    totalQuestionLength,
+    onClickSubmit,
+    quizCategory,
+    quizIcon
   );
-  populateAnswerList(currentQuestion.options, document);
+  populateAnswerList(document, quizState);
 }
 
-// 回答送信時の処理
-const onClickSubmit = () => {
+const onClickNext = (e) => {
+  if (quizState.totalQuestionLength >= quizState.quizNum) {
+  }
   quizState.nextQuestion();
   showCurrentQuestion();
+};
+
+const onClickScore = (e) => {
+  console.log(quizState.totalCorrectNum);
+};
+
+// 回答送信時の処理
+const onClickSubmit = (e) => {
+  if (quizState.currentCorrectness === null) {
+    return console.error("answer has to be selected.");
+  }
+
+  const currentSelectedOptionDOM = findOptionDOM(
+    quizState.currentSelectedAnswer
+  );
+  if (quizState.currentCorrectness) {
+    currentSelectedOptionDOM.classList.add("correct");
+    quizState.totalCorrectNum++;
+  } else {
+    const currentAnswerOptionDOM = findOptionDOM(quizState.currentQuizAnswer);
+    currentAnswerOptionDOM.classList.add("correct");
+    currentSelectedOptionDOM.classList.add("incorrect");
+  }
+
+  e.currentTarget.removeEventListener("click", onClickSubmit);
+
+  if (quizState.totalQuestionLength <= quizState.quizNum + 1) {
+    e.currentTarget.removeEventListener("click", onClickNext);
+    e.currentTarget.textContent = "Show up your SCORE!";
+    e.currentTarget.addEventListener("click", onClickScore);
+  } else {
+    e.currentTarget.textContent = "Next Question";
+    e.currentTarget.addEventListener("click", onClickNext);
+  }
 };
 
 // カテゴリボタンにイベント登録
