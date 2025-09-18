@@ -36,3 +36,14 @@
     border-radius: 999px;
   }
 }
+
+@media (width >= calc(1440 / 16 * 1rem)) {
+  .quiz-app__question-group {
+    flex: 0 0 calc(465 / 16 * 1rem);
+    gap: calc(184 / 16 * 1rem);
+  }
+
+  .quiz-app__question-heading-group {
+    gap: var(--spacing-300);
+  }
+}

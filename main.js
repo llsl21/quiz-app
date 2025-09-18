@@ -86,7 +86,21 @@ const onClickScore = (e) => {
 // 回答送信時の処理
 const onClickSubmit = (e) => {
   if (quizState.currentCorrectness === null) {
-    return console.error("answer has to be selected.");
+    const answerGroup = document.querySelector(".quiz-app__answer-group");
+    const alert = document.createElement("p");
+    alert.textContent = "Please select an answer";
+    alert.classList.add("alert");
+    answerGroup.append(alert);
+    setTimeout(() => {
+      alert.classList.add("active");
+    }, 0);
+    setTimeout(() => {
+      alert.classList.remove("active");
+      setTimeout(() => {
+        alert.remove();
+      }, 500);
+    }, 5000);
+    return;
   }
 
   const currentSelectedOptionDOM = findOptionDOM(

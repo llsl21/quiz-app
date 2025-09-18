@@ -53,6 +53,10 @@ button {
     padding-block-end: calc(225 / 16 * 1rem);
     background-position: left calc(-539 / 16 * 1rem) top calc(-446 / 16 * 1rem);
   }
+
+  body:has(main.quiz-app__question-view) {
+    padding-block-end: calc(124 / 16 * 1rem);
+  }
 }
 
 @media (width >= calc(1440 / 16 * 1rem)) {
@@ -72,5 +76,9 @@ button {
       );
     background-position: left calc(-540 / 16 * 1rem) top calc(-413 / 16 * 1rem),
       right calc(-437 / 16 * 1rem) bottom calc(-369 / 16 * 1rem);
+  }
+
+  body:has(main.quiz-app__question-view) {
+    padding-block-end: calc(148 / 16 * 1rem);
   }
 }

@@ -7,3 +7,20 @@
   flex-direction: column;
   gap: var(--spacing-500);
 }
+
+@media (width >= calc(768 / 16 * 1rem)) {
+  .quiz-app__question-view {
+    padding: 0 var(--spacing-800);
+  }
+}
+
+@media (width >= calc(1440 / 16 * 1rem)) {
+  .quiz-app__question-view {
+    padding: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: calc(1157 / 16 * 1rem);
+    margin-inline: auto;
+    gap: var(--spacing-1600);
+  }
+}

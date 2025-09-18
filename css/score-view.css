@@ -96,3 +96,55 @@
   justify-content: center;
   align-items: center;
 }
+
+@media (width >= calc(768 / 16 * 1rem)) {
+  .scoreView {
+    padding: 0 var(--spacing-800);
+    gap: var(--spacing-800);
+  }
+
+  .scoreView__group {
+    gap: var(--spacing-400);
+  }
+
+  .scoreView__content {
+    padding: var(--spacing-600);
+    gap: var(--spacing-500);
+    border-radius: calc(24 / 16 * 1rem);
+  }
+
+  .scoreView__img-wrapper {
+    width: var(--spacing-700);
+  }
+
+  .scoreView__score-wrapper {
+    text-align: center;
+  }
+
+  .scoreView__total-question-length {
+    font: var(--text-preset-5-medium);
+  }
+
+  .replay-button {
+    padding: var(--spacing-400);
+    border-radius: calc(24 / 16 * 1rem);
+  }
+}
+
+@media (width >= calc(1440 / 16 * 1rem)) {
+  .scoreView {
+    flex-direction: row;
+    max-width: calc(1157 / 16 * 1rem);
+    margin-inline: auto;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  .scoreView__heading {
+    flex: 0 0 calc(450 / 16 * 1rem);
+  }
+
+  .scoreView__group {
+    flex: 0 0 calc(564 / 16 * 1rem);
+  }
+}
