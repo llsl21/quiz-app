@@ -26,93 +26,97 @@
         </div>
       </template>
       <div class="quiz-app__header-row">
-          <picture class="quiz-app__header-img-wrapper">
-            <source
-              srcset="/assets/images/icon-sun-light.svg"
-              data-theme="dark"
-            />
-            <source
-              srcset="/assets/images/icon-sun-dark.svg"
-              data-theme="light"
-            />
-            <img
-              src="/assets/images/icon-sun-dark.svg"
-              alt=""
-              data-theme="light"
-            />
-          </picture>
-          <div class="quiz-app__header-switch">
-            <label for="header__switch">
-              <input type="checkbox" id="header__switch" />
-            </label>
-          </div>
-          <picture class="quiz-app__header-img-wrapper">
-            <source
-              srcset="/assets//images/icon-moon-light.svg"
-              data-theme="dark"
-            />
-            <source
-              srcset="/assets//images/icon-moon-dark.svg"
-              data-theme="light"
-            />
-            <img
-              src="/assets/images/icon-moon-dark.svg"
-              alt=""
-              data-theme="light"
-            />
-          </picture>
+        <picture class="quiz-app__header-img-wrapper">
+          <source
+            srcset="/assets/images/icon-sun-light.svg"
+            data-theme="dark"
+          />
+          <source
+            srcset="/assets/images/icon-sun-dark.svg"
+            data-theme="light"
+          />
+          <img
+            src="/assets/images/icon-sun-dark.svg"
+            alt=""
+            data-theme="light"
+          />
+        </picture>
+        <div class="quiz-app__header-switch">
+          <label for="header__switch">
+            <input type="checkbox" id="header__switch" />
+          </label>
+        </div>
+        <picture class="quiz-app__header-img-wrapper">
+          <source
+            srcset="/assets//images/icon-moon-light.svg"
+            data-theme="dark"
+          />
+          <source
+            srcset="/assets//images/icon-moon-dark.svg"
+            data-theme="light"
+          />
+          <img
+            src="/assets/images/icon-moon-dark.svg"
+            alt=""
+            data-theme="light"
+          />
+        </picture>
       </div>
     </header>
-    <main class="quiz-app">
-      <div class="quiz-app__heading-group">
-        <h2 class="quiz-app__heading">Welcome to the <b>Frontend Quiz!</b></h2>
-        <p class="quiz-app__heading-eyebrow">Pick a subject to get started</p>
-      </div>
-      <div class="quiz-app__category">
-        <ul class="quiz-app__category-list list">
-          <li class="quiz-app__category-list-item list-item">
-            <button class="quiz-app__category-list-button list-item__button">
-              <div
-                class="quiz-app__category-list-img-wrapper img-html list-item__img-wrapper"
-              >
-                <img src="assets/images/icon-html.svg" />
-              </div>
-              HTML
-            </button>
-          </li>
-          <li class="quiz-app__category-list-item list-item">
-            <button class="quiz-app__category-list-button list-item__button">
-              <div
-                class="quiz-app__category-list-img-wrapper img-css list-item__img-wrapper"
-              >
-                <img src="assets/images/icon-css.svg" />
-              </div>
-              CSS
-            </button>
-          </li>
-          <li class="quiz-app__category-list-item list-item">
-            <button class="quiz-app__category-list-button list-item__button">
-              <div
-                class="quiz-app__category-list-img-wrapper img-js list-item__img-wrapper"
-              >
-                <img src="assets/images/icon-js.svg" />
-              </div>
-              JAVASCRIPT
-            </button>
-          </li>
-          <li class="quiz-app__category-list-item list-item">
-            <button class="quiz-app__category-list-button list-item__button">
-              <div
-                class="quiz-app__category-list-img-wrapper img-accessibility list-item__img-wrapper"
-              >
-                <img src="assets/images/icon-accessibility.svg" />
-              </div>
-              ACCESSIBILITY
-            </button>
-          </li>
-        </ul>
-      </div>
-    </main>
+    <template id="template-quiz-app">
+      <main class="quiz-app">
+        <div class="quiz-app__heading-group">
+          <h2 class="quiz-app__heading">
+            Welcome to the <b>Frontend Quiz!</b>
+          </h2>
+          <p class="quiz-app__heading-eyebrow">Pick a subject to get started</p>
+        </div>
+        <div class="quiz-app__category">
+          <ul class="quiz-app__category-list list">
+            <li class="quiz-app__category-list-item list-item">
+              <button class="quiz-app__category-list-button list-item__button">
+                <div
+                  class="quiz-app__category-list-img-wrapper img-html list-item__img-wrapper"
+                >
+                  <img src="assets/images/icon-html.svg" />
+                </div>
+                HTML
+              </button>
+            </li>
+            <li class="quiz-app__category-list-item list-item">
+              <button class="quiz-app__category-list-button list-item__button">
+                <div
+                  class="quiz-app__category-list-img-wrapper img-css list-item__img-wrapper"
+                >
+                  <img src="assets/images/icon-css.svg" />
+                </div>
+                CSS
+              </button>
+            </li>
+            <li class="quiz-app__category-list-item list-item">
+              <button class="quiz-app__category-list-button list-item__button">
+                <div
+                  class="quiz-app__category-list-img-wrapper img-js list-item__img-wrapper"
+                >
+                  <img src="assets/images/icon-js.svg" />
+                </div>
+                JAVASCRIPT
+              </button>
+            </li>
+            <li class="quiz-app__category-list-item list-item">
+              <button class="quiz-app__category-list-button list-item__button">
+                <div
+                  class="quiz-app__category-list-img-wrapper img-accessibility list-item__img-wrapper"
+                >
+                  <img src="assets/images/icon-accessibility.svg" />
+                </div>
+                ACCESSIBILITY
+              </button>
+            </li>
+          </ul>
+        </div>
+      </main>
+    </template>
 
     <template id="template__question-view">
       <main class="quiz-app__question-view">
@@ -150,6 +154,24 @@
               Submit Answer
             </button>
           </div>
+        </div>
+      </main>
+    </template>
+    <template id="template-scoreView">
+      <main class="scoreView">
+        <h2 class="scoreView__heading">Quiz Completed <b>You scored...</b></h2>
+        <div class="scoreView__group">
+          <article class="scoreView__content">
+            <div class="scoreView__row">
+              <div class="scoreView__img-wrapper"><img src="" alt="" /></div>
+              <p class="scoreView__category"></p>
+            </div>
+            <div class="scoreView__score-wrapper">
+              <p class="scoreView__score"></p>
+              <p class="scoreView__total-question-length"></p>
+            </div>
+          </article>
+          <button class="scoreView__button replay-button">Play Again</button>
         </div>
       </main>
     </template>

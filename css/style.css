@@ -5,6 +5,7 @@
 @import url(quiz-app.css);
 @import url(list.css);
 @import url(question-view.css);
+@import url(score-view.css);
 
 *,
 *::before,

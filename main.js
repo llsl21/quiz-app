@@ -1,34 +1,3 @@
-// const root = document.documentElement;
-// const themeSwitch = document.getElementById("header__switch");
-
-// function applyTheme(theme) {
-//   const sources = document.querySelectorAll("source");
-//   sources.forEach((source) => {
-//     if (source.dataset.theme === theme) {
-//       source.removeAttribute("media");
-//     } else {
-//       source.media = "not all";
-//     }
-//   });
-// }
-
-// themeSwitch.addEventListener("click", (ev) => {
-//   console.log("clicked");
-
-//   if (ev.target.checked) {
-//     root.dataset.theme = "dark";
-//   } else {
-//     root.dataset.theme = "light";
-//   }
-//   applyTheme(root.dataset.theme);
-// });
-
-// function initApp() {
-//   applyTheme(root.dataset.theme);
-// }
-
-// initApp();
-
 import { setupThemeSwitch } from "./js/theme-switch.js";
 import { QuizState } from "./js/state.js";
 import { fetchQuizzes, findQuizByTitle } from "./js/quiz.js";
@@ -37,23 +6,18 @@ import {
   populateAnswerList,
   findOptionDOM,
   populateHeader,
+  renderScoreView,
+  setupInitialPage,
+  withCommon,
 } from "./js/ui.js";
 
 // クイズ状態管理インスタンス
 const quizState = new QuizState();
 
-// テーマ切り替え
-setupThemeSwitch({
-  switchSelector: "#header__switch",
-  initial: document.documentElement.dataset.theme,
-  persist: true,
-});
-
 // カテゴリ選択時の処理
 const onClickCategory = async (e) => {
   e.preventDefault();
 
-  window.scrollTo(0, 0);
   const category = e.currentTarget.textContent.trim();
 
   const quizzes = await fetchQuizzes();
@@ -72,6 +36,18 @@ const onClickCategory = async (e) => {
   showCurrentQuestion();
 };
 
+// テーマ切り替え
+setupThemeSwitch({
+  switchSelector: "#header__switch",
+  initial: document.documentElement.dataset.theme,
+  persist: true,
+});
+
+setupInitialPage(
+  document.getElementById("template-quiz-app"),
+  withCommon(onClickCategory)
+);
+
 // 問題表示
 function showCurrentQuestion() {
   const { currentQuiz, totalQuestionLength, quizNum } = quizState;
@@ -82,7 +58,7 @@ function showCurrentQuestion() {
     document,
     quizNum + 1,
     totalQuestionLength,
-    onClickSubmit,
+    onClickSubmit
   );
   populateAnswerList(document, quizState);
 }
@@ -90,13 +66,21 @@ function showCurrentQuestion() {
 const onClickNext = (e) => {
   if (quizState.totalQuestionLength >= quizState.quizNum) {
   }
-  window.scrollTo(0, 0);
   quizState.nextQuestion();
   showCurrentQuestion();
 };
 
+const onReplayClick = (e) => {
+  quizState.resetQuizState();
+  setupInitialPage(
+    document.getElementById("template-quiz-app"),
+    onClickCategory
+  );
+};
+
 const onClickScore = (e) => {
-  console.log(quizState.totalCorrectNum);
+  const scoreTemplate = document.getElementById("template-scoreView");
+  renderScoreView(scoreTemplate, quizState, withCommon(onReplayClick));
 };
 
 // 回答送信時の処理
@@ -104,7 +88,6 @@ const onClickSubmit = (e) => {
   if (quizState.currentCorrectness === null) {
     return console.error("answer has to be selected.");
   }
-
 
   const currentSelectedOptionDOM = findOptionDOM(
     quizState.currentSelectedAnswer
@@ -123,17 +106,9 @@ const onClickSubmit = (e) => {
   if (quizState.totalQuestionLength <= quizState.quizNum + 1) {
     e.currentTarget.removeEventListener("click", onClickNext);
     e.currentTarget.textContent = "Show up your SCORE!";
-    e.currentTarget.addEventListener("click", onClickScore);
+    e.currentTarget.addEventListener("click", withCommon(onClickScore));
   } else {
     e.currentTarget.textContent = "Next Question";
-    e.currentTarget.addEventListener("click", onClickNext);
+    e.currentTarget.addEventListener("click", withCommon(onClickNext));
   }
 };
-
-// カテゴリボタンにイベント登録
-const categoryButtons = document.querySelectorAll(
-  ".quiz-app__category-list-button"
-);
-categoryButtons.forEach((categoryButton) => {
-  categoryButton.addEventListener("click", onClickCategory);
-});

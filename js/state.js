@@ -74,4 +74,12 @@ export class QuizState {
     this.currentCorrectness = this.currentQuizAnswer === option;
     this.selectedIndex = index;
   }
+
+  resetQuizState() {
+    this.quizNum = 0;
+    this.quizObj = null;
+    this.correctness = null;
+    this.selectedIndex = null;
+    this.totalCorrectNum = 0;
+  }
 }

@@ -54,7 +54,6 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  
 
   &.img-html {
     background-color: var(--orange-50);
@@ -62,7 +61,7 @@
   &.img-css {
     background-color: var(--green-100);
   }
-  &.img-js {
+  &.img-javascript {
     background-color: var(--blue-50);
   }
   &.img-accessibility {

@@ -44,7 +44,7 @@
   &:has(.img-css) {
     background-color: var(--green-100);
   }
-  &:has(.img-js) {
+  &:has(.img-javascript) {
     background-color: var(--blue-50);
   }
   &:has(.img-accessibility) {
