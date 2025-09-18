@@ -36,7 +36,7 @@ import {
   populateQuestion,
   populateAnswerList,
   findOptionDOM,
-  getHeaderTemplate,
+  populateHeader,
 } from "./js/ui.js";
 
 // クイズ状態管理インスタンス
@@ -52,6 +52,8 @@ setupThemeSwitch({
 // カテゴリ選択時の処理
 const onClickCategory = async (e) => {
   e.preventDefault();
+
+  window.scrollTo(0, 0);
   const category = e.currentTarget.textContent.trim();
 
   const quizzes = await fetchQuizzes();
@@ -62,16 +64,18 @@ const onClickCategory = async (e) => {
   }
 
   quizState.setQuiz(quiz);
+  populateHeader(
+    document.querySelector(".quiz-app__header"),
+    quizState.quizCategory,
+    quizState.quizIcon
+  );
   showCurrentQuestion();
 };
 
 // 問題表示
 function showCurrentQuestion() {
-  const { currentQuiz, totalQuestionLength, quizNum, quizCategory, quizIcon } =
-    quizState;
+  const { currentQuiz, totalQuestionLength, quizNum } = quizState;
   if (!currentQuiz) return;
-
-  populateHeader(quizCategory, quizIcon);
 
   populateQuestion(
     currentQuiz,
@@ -79,8 +83,6 @@ function showCurrentQuestion() {
     quizNum + 1,
     totalQuestionLength,
     onClickSubmit,
-    quizCategory,
-    quizIcon
   );
   populateAnswerList(document, quizState);
 }
@@ -88,6 +90,7 @@ function showCurrentQuestion() {
 const onClickNext = (e) => {
   if (quizState.totalQuestionLength >= quizState.quizNum) {
   }
+  window.scrollTo(0, 0);
   quizState.nextQuestion();
   showCurrentQuestion();
 };
@@ -101,6 +104,7 @@ const onClickSubmit = (e) => {
   if (quizState.currentCorrectness === null) {
     return console.error("answer has to be selected.");
   }
+
 
   const currentSelectedOptionDOM = findOptionDOM(
     quizState.currentSelectedAnswer

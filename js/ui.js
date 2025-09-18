@@ -6,9 +6,9 @@ export function populateHeader(root, quizCategory, quizIcon) {
   const img = headerFragment.querySelector(".header-row__logo-img");
   const heading = headerFragment.querySelector(".header-row__logo-heading");
   img.src = quizIcon;
+  img.classList.add(`img-${quizCategory.toLowerCase()}`);
   heading.textContent = quizCategory;
-    
-
+  root.prepend(headerFragment);
 }
 
 export function populateElement(root, selector, value) {
@@ -54,8 +54,6 @@ export function populateQuestion(
   current,
   total,
   onSubmit,
-  quizCategory,
-  quizIcon
 ) {
   const main = document.querySelector("main");
   const questionTemplate = root.getElementById("template__question-view");

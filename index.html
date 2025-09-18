@@ -17,50 +17,50 @@
   </head>
   <body>
     <header class="quiz-app__header">
-      <div class="quiz-app__header-row">
-        <template id="template__header">
-          <div class="header-row__logo-wrapper">
-            <div class="header-row__logo-img-wrapper">
-              <img src="" alt="" class="header-row__logo-img" />
-            </div>
-            <p class="header-row__logo-heading"></p>
+      <template id="template__header">
+        <div class="header-row__logo-wrapper">
+          <div class="header-row__logo-img-wrapper">
+            <img src="" alt="" class="header-row__logo-img" />
           </div>
-        </template>
-        <picture class="quiz-app__header-img-wrapper">
-          <source
-            srcset="/assets/images/icon-sun-light.svg"
-            data-theme="dark"
-          />
-          <source
-            srcset="/assets/images/icon-sun-dark.svg"
-            data-theme="light"
-          />
-          <img
-            src="/assets/images/icon-sun-dark.svg"
-            alt=""
-            data-theme="light"
-          />
-        </picture>
-        <div class="quiz-app__header-switch">
-          <label for="header__switch">
-            <input type="checkbox" id="header__switch" />
-          </label>
+          <p class="header-row__logo-heading"></p>
         </div>
-        <picture class="quiz-app__header-img-wrapper">
-          <source
-            srcset="/assets//images/icon-moon-light.svg"
-            data-theme="dark"
-          />
-          <source
-            srcset="/assets//images/icon-moon-dark.svg"
-            data-theme="light"
-          />
-          <img
-            src="/assets/images/icon-moon-dark.svg"
-            alt=""
-            data-theme="light"
-          />
-        </picture>
+      </template>
+      <div class="quiz-app__header-row">
+          <picture class="quiz-app__header-img-wrapper">
+            <source
+              srcset="/assets/images/icon-sun-light.svg"
+              data-theme="dark"
+            />
+            <source
+              srcset="/assets/images/icon-sun-dark.svg"
+              data-theme="light"
+            />
+            <img
+              src="/assets/images/icon-sun-dark.svg"
+              alt=""
+              data-theme="light"
+            />
+          </picture>
+          <div class="quiz-app__header-switch">
+            <label for="header__switch">
+              <input type="checkbox" id="header__switch" />
+            </label>
+          </div>
+          <picture class="quiz-app__header-img-wrapper">
+            <source
+              srcset="/assets//images/icon-moon-light.svg"
+              data-theme="dark"
+            />
+            <source
+              srcset="/assets//images/icon-moon-dark.svg"
+              data-theme="light"
+            />
+            <img
+              src="/assets/images/icon-moon-dark.svg"
+              alt=""
+              data-theme="light"
+            />
+          </picture>
       </div>
     </header>
     <main class="quiz-app">
